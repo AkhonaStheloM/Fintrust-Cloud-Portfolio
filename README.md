@@ -1,10 +1,10 @@
-#AWS Cloud Solutions Architect Learning Portfolio
+# AWS Cloud Solutions Architect Learning Portfolio
 
->Preparing for the AWS Certified Solutions Architect – Associate certification.
+> Preparing for the AWS Certified Solutions Architect – Associate certification.
 
-##1. My Career Direction: Cloud Solutions Architect
+## 1. My Career Direction: Cloud Solutions Architect
 
-###What the role does
+### What the role does
 A Cloud Solutions Architect designs and guides cloud solutions that meet both business and technical requirements.
 
 The role includes:
@@ -18,7 +18,7 @@ The role includes:
 - Working with development, operations, security, and business teams.
 - Using automation, Infrastructure as Code, and DevOps practices to improve cloud deployments.
 
-##2. Client Brief: FinTrust Bank SA
+## 2. Client Brief: FinTrust Bank SA
 
 FinTrust Bank SA is a South African digital bank serving approximately 2.3 million customers across all nine provinces. Its systems currently run on on-premises servers located in two data centres: one in Johannesburg and one in Cape Town.
 
@@ -30,7 +30,7 @@ The bank is under pressure from several areas:
 - Increasing card fraud, creating a need for real-time transaction monitoring.
 - Transaction latency of between 3 and 5 seconds during peak periods, which is unacceptable for a modern digital banking service.
 
-###The assignment
+### The assignment
 
 My assignment is to design and progressively build a cloud-native transaction intelligence system for FinTrust Bank SA using AWS.
 
@@ -46,6 +46,6 @@ The solution must help FinTrust:
 - Improve reliability while managing cloud costs responsibly.
 
 
-###Portfolio focus
+### Portfolio focus
 
 This portfolio demonstrates my journey toward becoming a Cloud Solutions Architect with a focus on AWS. Using the FinTrust Bank SA scenario, I am developing practical skills in designing secure and scalable cloud solutions, working with compute, storage, databases, SQL, networking, IAM, Python automation, DevOps, Infrastructure as Code, APIs, analytics, monitoring, cost management, migration, and data governance. the AWS Certified Solutions Architect - Associate certification.
