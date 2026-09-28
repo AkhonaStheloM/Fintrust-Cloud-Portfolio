@@ -1,6 +1,6 @@
 ###Exercise 1
-from decimal import Decimal
-
+from decimal import Decimal 
+import math
 
 def format_account_summary(customer_name, account_type, balance):
     d_balance = Decimal(str(balance))
