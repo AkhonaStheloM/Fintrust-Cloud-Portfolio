@@ -31,7 +31,6 @@ FROM transactions
 GROUP BY transaction_type
 HAVING COUNT(*) > 2;
 
--- Ex*rcise 1: Transaction summary per c*stomer
 
 -- Exercise 1: Transaction summary per customer
 SELECT
@@ -107,5 +106,5 @@ GROUP BY
     c.last_name,
     DATE(t.transaction_date)
 HAVING COUNT(*) > 3
-ORDER BY debit_count DESC;
+ORDER BY debit_count DESC, transaction_date;
 
