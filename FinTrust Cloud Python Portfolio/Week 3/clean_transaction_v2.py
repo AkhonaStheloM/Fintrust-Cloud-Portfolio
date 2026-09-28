@@ -118,4 +118,64 @@ def main():
             "Permission denied reading %s",
             RAW_INPUT
         )
-     
+        return
+
+    fieldnames = [
+        "transaction_id",
+        "account_id",
+        "type",
+        "amount",
+        "date",
+        "description"
+    ]
+
+    with open(
+        CLEAN_CSV,
+        "w",
+        newline="",
+        encoding="utf-8"
+    ) as fout:
+        writer = csv.DictWriter(
+            fout,
+            fieldnames=fieldnames
+        )
+        writer.writeheader()
+        writer.writerows(transactions)
+
+    summary = {
+        "total_transactions": len(transactions),
+        "total_deposits": sum(
+            1 for t in transactions if t["type"] == "deposit"
+        ),
+        "total_withdrawals": sum(
+            1 for t in transactions if t["type"] == "withdrawal"
+        ),
+        "sum_deposits": round(
+            sum(t["amount"] for t in transactions if t["type"] == "deposit"),
+            2
+        ),
+        "sum_withdrawals": round(
+            sum(t["amount"] for t in transactions if t["type"] == "withdrawal"),
+            2
+        )
+    }
+
+    with open(
+        SUMMARY_JSON,
+        "w",
+        encoding="utf-8"
+    ) as fout:
+        json.dump(summary, fout, indent=2)
+
+    logger.info(
+        "Processed %d valid transactions; skipped %d rows",
+        len(transactions),
+        skipped
+    )
+    logger.info("Clean CSV created: %s", CLEAN_CSV)
+    logger.info("Summary JSON created: %s", SUMMARY_JSON)
+
+
+if __name__ == "__main__":
+    main()
+
