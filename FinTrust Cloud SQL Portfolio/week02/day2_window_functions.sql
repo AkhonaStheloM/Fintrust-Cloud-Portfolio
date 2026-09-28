@@ -1,3 +1,5 @@
+USE fintrust_db;
+
 WITH customer_spend AS (
     SELECT
         a.customer_id,
