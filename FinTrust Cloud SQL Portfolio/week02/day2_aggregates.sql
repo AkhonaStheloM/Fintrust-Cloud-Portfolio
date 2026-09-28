@@ -25,7 +25,7 @@ FROM transactions
 GROUP BY transaction_type;
 
 SELECT
-    transaction_type*
+    transaction_type,
     COUNT(*) AS total
 FROM transactions
 GROUP BY transaction_type
@@ -106,5 +106,5 @@ GROUP BY
     c.last_name,
     DATE(t.transaction_date)
 HAVING COUNT(*) > 3
-ORDER BY debit_count DESC, transaction_date;
+ORDER BY debit_count DESC, transaction_day;
 
