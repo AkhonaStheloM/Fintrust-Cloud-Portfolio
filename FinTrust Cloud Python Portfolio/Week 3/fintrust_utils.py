@@ -87,24 +87,4 @@ def generate_report_header(customer_name, account_id):
         f"{'-' * 40}"
     )
     
-#Exercise 1
-def calculate_monthly_fee(account_type):
-    if account_type == "savings":
-        return 0
-    elif account_type == "cheque":
-        return 65
-    elif account_type == "credit":
-        return 120
-    
-#Exercise 2
-def mask_id_number(id_number):
-    s = str(id_number)
-    return s[:6] + "******" + s[-1]
 
-#Exercise 3
-def summarise_transactions(transactions):
-    total_in = sum(t for t in transactions if t > 0)
-    total_out = sum(t for t in transactions if t < 0)
-    net = total_in + total_out
-
-    return total_in, total_out, net
