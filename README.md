@@ -46,6 +46,14 @@ The solution must help FinTrust:
 - Improve reliability while managing cloud costs responsibly.
 
 
-### Portfolio focus
+## 3. Weekly portfolio work
 
-This portfolio demonstrates my journey toward becoming a Cloud Solutions Architect with a focus on AWS. Using the FinTrust Bank SA scenario, I am developing practical skills in designing secure and scalable cloud solutions, working with compute, storage, databases, SQL, networking, IAM, Python automation, DevOps, Infrastructure as Code, APIs, analytics, monitoring, cost management, migration, and data governance. the AWS Certified Solutions Architect - Associate certification.
+The practical work is organised by week and subject. Week 02 combines Python decision logic with SQL transaction analysis.
+
+- [Week 02 overview](https://github.com/AkhonaStheloM/Fintrust-Cloud-Portfolio/blob/main/FinTrust%20Cloud%20Python%20Portfolio/Week%202/README.md)
+- [Week 02 Python work](https://github.com/AkhonaStheloM/Fintrust-Cloud-Portfolio/tree/main/FinTrust%20Cloud%20Python%20Portfolio/Week%202)
+- [Week 02 SQL work](https://github.com/AkhonaStheloM/Fintrust-Cloud-Portfolio/tree/main/FinTrust%20Cloud%20SQL%20Portfolio/week02)
+
+## 4. Portfolio focus
+
+This portfolio demonstrates my journey toward becoming a Cloud Solutions Architect with a focus on AWS. Using the FinTrust Bank SA scenario, I am developing practical skills in designing secure and scalable cloud solutions, working with compute, storage, databases, SQL, networking, IAM, Python automation, DevOps, Infrastructure as Code, APIs, analytics, monitoring, cost management, migration, and data governance.
