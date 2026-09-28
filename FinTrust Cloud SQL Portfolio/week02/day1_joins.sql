@@ -45,11 +45,13 @@ SELECT
     c.first_name,
     c.last_name
 FROM customers c
-LEFT JOIN accounts a
-    ON c.customer_id = a.customer_id
-LEFT JOIN transactions t
-    ON a.account_id = t.account_id
-WHERE t.transaction_id IS NULL;
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM accounts a
+    INNER JOIN transactions t
+        ON a.account_id = t.account_id
+    WHERE a.customer_id = c.customer_id
+);
 
 -- Exercise 5: Transactions greater than
 SELECT
