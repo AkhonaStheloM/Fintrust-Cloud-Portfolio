@@ -1,4 +1,4 @@
-USE fintrust_db;
+USE fintrust;
 
 -- Find all customers from Gauteng
 SELECT *
