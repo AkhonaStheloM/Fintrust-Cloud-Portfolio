@@ -2,7 +2,7 @@
 
 ## Status
 
-Week 1 SQL files are uploaded for review. The SQL artefacts are currently stored directly in this `week01/` folder. The critical issues listed below should be resolved before treating the work as a clean, runnable submission.
+Week 1 SQL files are uploaded to GitHub and the five critical syntax/filter fixes identified in review have been applied to the branches and WHERE challenge files. The official route is the Day 2 `fintrust` schema; `day4_where_filtering.sql` now also uses `fintrust`. The alternative Day 3 `fintrust_db` schema remains a separate learning exercise. No live SQL execution has been performed because no database environment is connected.
 
 ## What This Week Covers
 
@@ -34,19 +34,19 @@ Week 1 SQL files are uploaded for review. The SQL artefacts are currently stored
 | `day3_branches_challenge.sql` | Adds branches and links accounts to branches |
 | `day3_fintrust_schema.sql` | Alternative five-row schema and sample dataset using `fintrust_db` |
 | `day4_where_challenge.sql` | `WHERE` clause challenge queries |
-| `day4_where_filtering.sql` | Extended `WHERE` filtering practice using `fintrust_db` |
+| `day4_where_filtering.sql` | Extended `WHERE` filtering practice using `fintrust` |
 
-## Critical Review Findings
+## Critical Review Findings and Current Status
 
 These are correctness or execution blockers, not cosmetic suggestions.
 
-1. **The database names are inconsistent.** The Day 2 scripts use `fintrust`, while `day3_fintrust_schema.sql` and `day4_where_filtering.sql` use `fintrust_db`. Choose one database name and use it consistently before running the files as one portfolio sequence.
+1. **Database-name decision recorded.** The recommended official Week 1 route is the Day 2 `fintrust` schema. `day4_where_filtering.sql` has been updated to use `USE fintrust;`. The separate `day3_fintrust_schema.sql` exercise still uses `fintrust_db` and should not be run as part of the official `fintrust` sequence without further reconciliation.
 
 2. **There are two different schema/data designs.** `day2_create_fintrust_database_table.sql` plus `day2_insert_data.sql` define the 10-row dataset and include columns such as `id_number`, `phone`, `status`, `opened_date`, `description`, and `reference_no`. `day3_fintrust_schema.sql` defines a different five-row dataset with fewer columns. These scripts should not be treated as one uninterrupted setup sequence.
 
-3. **`day3_branches_challenge.sql` contains SQL errors.** The branch `INSERT` column list uses `branch_name. province` instead of a comma-separated `branch_name, province`. The second account update uses `accounts_id`, but the table defines `account_id`.
+3. **Resolved — `day3_branches_challenge.sql`.** The branch `INSERT` column list now uses `branch_name, province`, and the second account update now uses `account_id`. The file was uploaded to `main` after review. Its rerun assumptions remain documented below.
 
-4. **`day4_where_challenge.sql` contains incorrect filters.** The first query says it should find customers outside Gauteng and Western Cape, but uses `IN` instead of an exclusion condition. The second query's comment says R1,000–R2,000 while the SQL uses `BETWEEN 1000 AND 20000`. The third query uses `LIKE` with two values, which is not valid list filtering.
+4. **Resolved — `day4_where_challenge.sql`.** The province query now uses `NOT IN`, the balance range is `BETWEEN 1000 AND 2000`, and the merchant-category filter uses `IN ('Groceries', 'Food')`. The corrected file was uploaded to `main` after review.
 
 5. **The verification counts do not match every schema file.** `day2_data_verification.sql` expects 10 customers, 10 accounts, and 10 transactions, which matches `day2_insert_data.sql`. It does not match the five-row dataset in `day3_fintrust_schema.sql`.
 
@@ -56,7 +56,7 @@ These are correctness or execution blockers, not cosmetic suggestions.
 
 ## Recommended Run Decision
 
-Before running the portfolio as one sequence, choose the Day 2 `fintrust` setup as the main Week 1 dataset or choose the separate Day 3 `fintrust_db` practice schema. Do not mix the two without reconciling their database names, columns, row counts, and transaction types.
+The recommended route is the Day 2 `fintrust` setup as the main Week 1 dataset. Keep the separate Day 3 `fintrust_db` practice schema clearly separate, and do not mix the two without reconciling their database names, columns, row counts, and transaction types.
 
 A clean submission should then:
 
