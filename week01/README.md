@@ -26,15 +26,15 @@ Week 1 SQL files are uploaded to GitHub and the five critical syntax/filter fixe
 
 | File | Purpose |
 |---|---|
-| `day2_basic_select.sql` | Basic `SELECT`, ordering, filtering, `DISTINCT`, calculations, and `COUNT` exercises |
-| `day2_create_fintrust_database_table.sql` | Creates the `fintrust` database and the three main tables with the larger 10-row dataset structure |
-| `day2_data_verification.sql` | Checks expected row counts for customers, accounts, and transactions |
-| `day2_explore.sql` | Exploratory queries for customers, active accounts, provinces, and balances |
-| `day2_insert_data.sql` | Inserts the 10-customer, 10-account, and 10-transaction dataset |
-| `day3_branches_challenge.sql` | Adds branches and links accounts to branches |
-| `day3_fintrust_schema.sql` | Alternative five-row schema and sample dataset using `fintrust_db` |
-| `day4_where_challenge.sql` | `WHERE` clause challenge queries |
-| `day4_where_filtering.sql` | Extended `WHERE` filtering practice using `fintrust` |
+| `sql/day2_basic_select.sql` | Basic `SELECT`, ordering, filtering, `DISTINCT`, calculations, and `COUNT` exercises |
+| `sql/day2_create_fintrust_database_table.sql` | Creates the `fintrust` database and the three main tables with the larger 10-row dataset structure |
+| `sql/day2_data_verification.sql` | Checks expected row counts for customers, accounts, and transactions |
+| `sql/day2_explore.sql` | Exploratory queries for customers, active accounts, provinces, and balances |
+| `sql/day2_insert_data.sql` | Inserts the 10-customer, 10-account, and 10-transaction dataset |
+| `sql/day3_branches_challenge.sql` | Adds branches and links accounts to branches |
+| `sql/day3_fintrust_schema.sql` | Alternative five-row schema and sample dataset using `fintrust_db` |
+| `sql/day4_where_challenge.sql` | `WHERE` clause challenge queries |
+| `sql/day4_where_filtering.sql` | Extended `WHERE` filtering practice using `fintrust` |
 
 ## Critical Review Findings and Current Status
 
@@ -86,7 +86,7 @@ fintrust-cloud-portfolio/
         └── week1_aws_notes.md
 ```
 
-The current repository has the SQL files directly under `week01/`, so the `sql/` and `notes/` organisation still needs to be completed if you want to match the recommended structure exactly.
+The SQL files are organised under `week01/sql/`. The learner-owned reflection and AWS notes still need to be added under `week01/notes/` when ready.
 
 ### Minimum Check-In #1 requirements
 
