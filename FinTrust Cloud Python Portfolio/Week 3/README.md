@@ -43,6 +43,7 @@ python clean_transactions.py
 python clean_transaction_v2.py
 python test_utils.py
 python setup_data_dirs.py
+python -m unittest discover -s . -p "test*.py" -v
 ```
 
 The basic scripts use Python's standard library. The dependency file is included to record the broader tools used in the portfolio's Python work.
