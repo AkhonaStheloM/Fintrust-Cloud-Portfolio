@@ -18,7 +18,7 @@ ADD CONSTRAINT fk_accounts_branches
     
 -- branch samples
 INSERT INTO branches
-	(branch_name. province, city)
+	(branch_name, province, city)
 VALUES
 	('Sandton City Branch', 'Gauteng', 'Johannesburg'),
     ('Cape Town CBD Branch', 'Western Cape', 'Cape Town'),
@@ -31,7 +31,7 @@ WHERE account_id = 1;
 
 UPDATE accounts
 SET branch_id = 2
-WHERE accounts_id = 6;
+WHERE account_id = 6;
 
 -- Verify results
 SELECT a.account_id, a.account_number, a.account_type, b.branch_name, b.city, b.province
