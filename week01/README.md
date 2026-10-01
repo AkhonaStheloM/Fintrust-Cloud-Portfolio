@@ -1,4 +1,4 @@
-# Week 1 — Cloud and SQL Foundations
+# Week 1: Cloud and SQL Foundations
 
 ## Overview
 
