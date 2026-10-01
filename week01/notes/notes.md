@@ -185,7 +185,3 @@ This information helps a Cloud Solutions Architect to:
 - Anticipate growth, failure, data volume, and operational change.
 - Communicate architecture decisions to both technical and business stakeholders.
 - Connect the technical solution to the people, governance, platform, security, and operations work needed for successful adoption.
-
-## Study and Evidence Boundary
-
-This file is a study summary based on the AWS Cloud Concepts PDF. It records concepts and design guidance for learning purposes. It is not evidence that AWS resources were created, configured, tested, or deployed. Practical evidence should be recorded separately using the relevant authorised screenshots, outputs, or activity records.
