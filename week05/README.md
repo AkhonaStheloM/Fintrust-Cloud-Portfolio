@@ -1,123 +1,82 @@
-# FinTrust Week 05 AWS Architecture Design
+# FinTrust Week 05: AWS Architecture Design
 
 ## Overview
 
-For Week 05, I designed a proposed AWS network and traffic routing layout for the FinTrust Bank SA scenario. The work is shown in four diagrams covering the VPC, hybrid connectivity, DNS and load balancer routing, and the combined CloudFront design.
+Week 05 documents a proposed AWS network and traffic-routing architecture for the FinTrust Bank SA scenario. Four diagrams cover the VPC foundation, hybrid connectivity, DNS and application routing, and a combined CloudFront design.
 
-The diagrams show the proposed design and the main decisions behind it. They are not proof that the AWS resources were deployed.
+This folder contains architecture documentation, not an executable implementation. The diagrams describe intended relationships between services. They do not establish that AWS resources were deployed, configured, or tested.
 
-## Week 05 diagrams
-
-### Day 1 VPC foundation
-
-File: [`day01_target_architecture.png`](./day01_target_architecture.png)
-
-For Day 1, I planned a VPC across two Availability Zones in the `af-south-1` region:
-
-- VPC CIDR: `10.0.0.0/16`
-- Availability Zone 1: `af-south-1a`
-- Availability Zone 2: `af-south-1b`
-- Public subnets for internet facing entry points
-- Application subnets for application services
-- Data subnets for transaction data and data layer workloads
-
-I separated the subnet ranges by layer and spread them across both Availability Zones. This gives each layer a clearer boundary and avoids putting everything in one failure zone.
-
-### Day 2 Hybrid connectivity
-
-File: [`day02_architecture_design.png`](./day02_architecture_design.png)
-
-The Day 2 diagram shows how existing FinTrust systems on premises could connect to AWS:
-
-1. Systems on premises connect through either a VPN or AWS Direct Connect.
-2. A Transit Gateway provides a central routing hub.
-3. Network Firewall, route controls, and monitoring form a central inspection and control layer.
-4. Separate Production, Development, Audit, and Shared Services VPCs receive logically controlled connectivity.
-
-I kept the customer facing workloads, engineering environments, audit evidence, and shared services separate instead of treating AWS as one unrestricted network.
-
-### Day 3 Route 53, CloudFront, and ALB routing
-
-File: [`day3_route53.png`](./day3_route53.png)
-
-The Day 3 diagram puts DNS, edge delivery, and application routing into one request flow:
-
-1. Internet users send requests to the FinTrust domain.
-2. Route 53 resolves the domain and represents health check based routing.
-3. CloudFront provides HTTPS edge delivery and separates static and dynamic content paths.
-4. A private S3 origin serves static portal assets through CloudFront access controls.
-5. An Application Load Balancer handles dynamic application traffic.
-6. ALB listener rules route `/api/*` requests to API targets and `/portal/*` requests to portal targets.
-7. A weighted release example shows a controlled canary split of 10% and production traffic of 90%.
-
-The percentages and routing values in the diagram are examples for learning. They are not live settings.
-
-### Day 4 Combined CloudFront architecture
-
-File: [`day04_cloudfront_architecture.png`](./day04_cloudfront_architecture.png)
-
-The Day 4 diagram brings the CloudFront request flow together with the VPC and hybrid connectivity context:
-
-1. Internet users enter through Route 53, which represents hosted zone resolution, health checks, TTL, and weighted routing.
-2. CloudFront provides HTTPS edge delivery with Origin Access Control enabled.
-3. Static portal assets are served from a private S3 bucket with public access blocked.
-4. Dynamic requests are forwarded to the Application Load Balancer.
-5. ALB listener rules direct `/api/*` traffic to API targets and `/portal/*` traffic to portal targets.
-6. The target groups connect to application workloads inside the FinTrust VPC spanning two Availability Zones.
-7. NAT gateways, security group flow, Transit Gateway, and connectivity to systems on premises are shown as supporting network context.
-
-This helped me show how the edge, application routing, network segmentation, and hybrid connectivity fit together. It is still a proposed design, not deployment evidence.
-
-## Key design decisions
-
-### Two Availability Zones
-
-I used two Availability Zones so the design is not dependent on one failure zone.
-
-### Layered subnet separation
-
-I separated the public, application, and data layers into different subnet groups. This makes the routing and access decisions easier to see. The diagrams do not claim that the route tables, Security Groups, network ACLs, or private endpoints were configured in AWS.
-
-### Centralised hybrid connectivity
-
-For Day 2, I used a central routing and inspection approach. Production, Development, Audit, and Shared Services are kept as separate logical environments.
-
-### Separation of static and dynamic delivery
-
-I separated the static portal assets from the dynamic application requests. The design uses CloudFront and a private S3 origin for static content, while the ALB handles the API and portal traffic.
-
-### Controlled releases
-
-The weighted routing example gives a canary release a smaller share of traffic before a wider rollout. The 10%/90% split is only an example and is not from a live deployment.
-
-### Readability and documentation
-
-I kept the diagrams simple, with short labels, clear boundaries, and arrows that show the direction of traffic. I used text labels for the AWS services so the diagrams stay readable.
-
-## Evidence boundary
-
-The diagrams in this folder are proposed designs only. They show what I planned, not what was deployed.
-
-The following items were not confirmed in AWS:
-
-- VPCs, subnets, route tables, or Availability Zones were provisioned.
-- VPN, Direct Connect, Transit Gateway, Network Firewall, or monitoring controls were configured.
-- Route 53 hosted zones or health checks were created.
-- CloudFront, S3, ALB, target groups, or weighted routing were deployed.
-- The illustrated architecture was tested with live traffic.
-- The diagrams represent production approved or security approved architecture.
-
-If I implement the design later, I will add separate evidence with the date, AWS region, resources, validation steps, and cost controls. For now, these files document proposed learning architectures only.
-
-## Files in this folder
+## Files
 
 | File | Purpose |
 |---|---|
-| `day01_target_architecture.png` | Proposed VPC spanning two Availability Zones |
-| `day02_architecture_design.png` | Proposed hybrid connectivity and central inspection design |
-| `day3_route53.png` | Proposed Route 53, CloudFront, ALB, and weighted routing design |
-| `day04_cloudfront_architecture.png` | Combined proposed CloudFront, VPC, ALB, and hybrid connectivity architecture |
+| [`day01_target_architecture.png`](./day01_target_architecture.png) | Proposed VPC foundation across two Availability Zones, with public, application, and data subnet layers |
+| [`day02_architecture_design.png`](./day02_architecture_design.png) | Proposed hybrid connectivity, central routing and inspection, and separate environment VPCs |
+| [`day3_route53.png`](./day3_route53.png) | Proposed Route 53, CloudFront, S3, ALB, and weighted traffic-routing flow |
+| [`day04_cloudfront_architecture.png`](./day04_cloudfront_architecture.png) | Combined edge delivery, application routing, VPC, and hybrid connectivity design |
+| [`day04_cloudfront_architecture/README.md`](./day04_cloudfront_architecture/README.md) | Supporting narrative describing five source-image sections; the five named PNG files are not present in the supplied inventory |
+| [`README.md`](./README.md) | Week-level overview, review workflow, and evidence boundaries |
 
-## Accuracy note
+The four root-level PNG files are the available diagram artifacts. The nested README’s statements about additional local images and upload status are not evidence that those images are included here.
 
-This README explains the diagrams and the decisions behind them. I will add reflections and AWS validation only after I have completed and documented those activities.
+## Architecture Walkthrough
+
+### Day 1: VPC foundation
+
+The documented design uses a VPC CIDR of `10.0.0.0/16` and two Availability Zones, `af-south-1a` and `af-south-1b`, in `af-south-1`.
+
+Public, application, and data subnet groups separate internet-facing entry points, application services, and data workloads. Spreading these layers across two Availability Zones expresses a resilience objective, but does not verify failover behavior or availability.
+
+`af-south-1` is retained as the diagram’s design value. It is not authorization to deploy there. Any lab discussion or implementation must use facilitator-approved Stockholm (`eu-north-1`), with regional details reviewed separately.
+
+### Day 2: Hybrid connectivity
+
+The hybrid design proposes connectivity from FinTrust systems on premises through VPN or AWS Direct Connect. A Transit Gateway provides a central routing hub, with Network Firewall, route controls, and monitoring represented as an inspection and control layer.
+
+Production, Development, Audit, and Shared Services VPCs are separated logically. The diagram communicates intended network boundaries, not validated routing, firewall policies, or working connectivity.
+
+### Day 3: DNS, edge delivery, and application routing
+
+The documented request flow starts with Route 53 domain resolution and continues through CloudFront:
+
+- Static portal assets use a private S3 origin with CloudFront access controls.
+- Dynamic requests reach an Application Load Balancer.
+- ALB listener rules direct `/api/*` and `/portal/*` requests to their respective targets.
+- A 10% canary and 90% production split illustrates controlled releases.
+
+The percentages are design examples, not live settings. DNS weighting and ALB request routing are distinct mechanisms; their presence in the design does not demonstrate a configured release workflow.
+
+### Day 4: Combined architecture
+
+The combined diagram brings Route 53, CloudFront, a private S3 origin, ALB routing, and application targets into the wider VPC context. Origin Access Control, blocked S3 public access, NAT gateways, security group flows, Transit Gateway, and on-premises connectivity are represented as proposed components.
+
+This view connects the edge-delivery design to network segmentation and hybrid access. It does not prove that the illustrated controls are enforced in AWS.
+
+## Local Review Workflow
+
+### Prerequisites
+
+- A local copy of `FinTrust-Cloud-Portfolio`
+- A Markdown viewer or text editor
+- An image viewer capable of opening PNG files
+
+No AWS account, credentials, CLI configuration, packages, or runtime are required to review this folder.
+
+From the repository root:
+
+```sh
+cd week05
+ls -l
+```
+
+Open the four linked PNG files in an image viewer and review them in Day 1 through Day 4 order. Read the nested README as supporting narrative, while noting its missing image references.
+
+**Inputs:** the FinTrust scenario, documented network ranges, proposed service relationships, and routing examples.
+
+**Outputs:** four architecture diagrams and Markdown documentation. There is no local application, infrastructure code, deployment command, or test suite supplied for this week.
+
+## Evidence and Deployment Boundaries
+
+The repository does not provide AWS console evidence, deployment logs, live traffic results, or validation of provisioned resources. It also does not establish production approval, security approval, or guaranteed zero downtime.
+
+Implementing this design would create potentially billable resources and could affect network access and traffic routing. Before any AWS action, validate the authorized account, facilitator-approved Stockholm region, permissions, service availability, quotas, expected costs, and cleanup responsibilities. The diagrams alone are not deployment instructions.
