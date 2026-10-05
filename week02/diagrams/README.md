@@ -41,11 +41,3 @@ The main design decision is to choose storage based on access pattern, performan
 The transaction flow shows the order used by the decision function. A blocked country is rejected first, followed by the daily amount limit and amount validation. Transactions that pass those checks are assessed against the higher amount threshold and trusted device status. The outcomes are blocked, pending, review, or approved.
 
 The ordering matters because hard restrictions should return immediately. Only transactions that pass the early checks should continue to device and amount assessment. This makes the rule sequence easier to test, explain, and audit.
-
-## Week 02 requirements
-
-The Praesignis Portfolio Check-In #2 requires joins_practice.sql, aggregates_report.sql, transaction_flowchart.py, and conditionals.py. README and architecture notes support the portfolio and earn bonus marks. These diagrams explain the compute, storage, and transaction topics; they do not replace the required SQL and Python files.
-
-The transaction diagram highlights the required ordering of the blocked-country check before any amount check.
-
-Source: [Praesignis Week 02 Portfolio Check-In #2](https://edusignis.praesignis.com/mod/resource/view.php?id=9934).
